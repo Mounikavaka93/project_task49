@@ -31,7 +31,7 @@ export default function TicketCard({ movie, ticket, code, compact = false }) {
     <article className="relative overflow-hidden rounded-[28px] bg-panel ring-1 ring-white/10">
       <div className="grid sm:grid-cols-[168px_minmax(0,1fr)]">
         <div className="min-h-48" style={{ background: movie?.wash || '#1a1a1f' }}>
-          {movie ? <Poster movie={movie} className="min-h-48" /> : null}
+          {movie ? <Poster movie={movie} className="h-full min-h-48" /> : null}
         </div>
         <div className="p-5 sm:p-6">
           <Eyebrow>{ticket.format}</Eyebrow>

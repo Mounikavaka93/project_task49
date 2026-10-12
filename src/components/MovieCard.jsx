@@ -9,7 +9,7 @@ export function Poster({ movie, className }) {
   const [visible, setVisible] = useState(true)
 
   return (
-    <div className={cn('relative h-full overflow-hidden', className)} style={{ background: movie.wash }}>
+    <div className={cn('relative overflow-hidden', className)} style={{ background: movie.wash }}>
       {visible ? (
         <img
           src={movie.poster || movie.image}

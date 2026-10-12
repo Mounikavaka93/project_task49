@@ -102,11 +102,11 @@ export function BackLink({ to, children }) {
 
 export function Logo({ className }) {
   return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <span className="grid h-8 w-8 place-items-center rounded-full border border-gold/80">
+    <span className={cn('inline-flex h-10 items-center gap-2.5', className)}>
+      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/80">
         <span className="h-2.5 w-2.5 rounded-full bg-gold shadow-[0_0_12px_rgba(226,177,92,0.85)]" />
       </span>
-      <span className="font-display text-xl tracking-wide text-cream">MOVIQ</span>
+      <span className="font-display text-xl leading-none tracking-wide text-cream">MOVIQ</span>
     </span>
   )
 }

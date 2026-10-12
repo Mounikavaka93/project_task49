@@ -77,18 +77,19 @@ export default function Navbar() {
   )
 
   return (
+    <>
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition duration-300',
-        solid ? 'border-b border-white/10 bg-ink/90 backdrop-blur-xl' : 'border-b border-transparent',
+        'fixed inset-x-0 top-0 z-50 h-16 border-b transition duration-300',
+        solid ? 'border-white/10 bg-ink/90 backdrop-blur-xl' : 'border-transparent',
       )}
     >
-      <div className="shell grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[auto_auto_minmax(12rem,1fr)_auto] md:gap-6">
+      <div className="shell flex h-full items-center gap-3 md:gap-5">
         <Link to="/" aria-label="MOVIQ home" className="shrink-0">
           <Logo />
         </Link>
         <nav className="hidden items-center gap-5 md:flex">{links}</nav>
-        <form onSubmit={onSearch} className="hidden min-w-0 md:block">
+        <form onSubmit={onSearch} className="hidden min-w-0 flex-1 md:block">
           <label className="relative block">
             <span className="sr-only">Search movies</span>
             <IconSearch className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted" />
@@ -100,7 +101,7 @@ export default function Navbar() {
             />
           </label>
         </form>
-        <div className="hidden items-center justify-end gap-3 md:flex">
+        <div className="ml-auto hidden items-center gap-3 md:flex">
           {user ? (
             <>
               <span className="flex items-center gap-2 text-sm text-cream">
@@ -126,7 +127,7 @@ export default function Navbar() {
         </div>
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center justify-self-end rounded-full border border-white/10 md:hidden"
+          className="ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
@@ -134,40 +135,43 @@ export default function Navbar() {
           {open ? <IconClose /> : <IconMenu />}
         </button>
       </div>
+    </header>
       {open ? (
-        <div className="menu-in fixed inset-0 top-16 z-40 overflow-y-auto bg-ink px-6 py-6 md:hidden">
-          <form onSubmit={onSearch}>
-            <label className="relative block">
-              <span className="sr-only">Search movies</span>
-              <IconSearch className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted" />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search films"
-                className="w-full rounded-full border border-white/10 bg-white/5 py-3 pr-3 pl-10 text-sm outline-none focus:border-gold/50"
-              />
-            </label>
-          </form>
-          <nav className="mt-8 grid gap-4 text-lg">{links}</nav>
-          <div className="mt-8 grid gap-3">
-            {user ? (
-              <>
-                <p className="text-sm text-muted">Signed in as {user.name}</p>
-                <Button onClick={logout}>Log out</Button>
-              </>
-            ) : (
-              <>
-                <Button as={Link} to="/login">
-                  Sign in
-                </Button>
-                <Button as={Link} to="/signup" variant="ghost">
-                  Create an account
-                </Button>
-              </>
-            )}
+        <div className="menu-in fixed inset-0 top-16 z-40 overflow-y-auto bg-ink md:hidden">
+          <div className="shell py-6">
+            <form onSubmit={onSearch}>
+              <label className="relative block">
+                <span className="sr-only">Search movies</span>
+                <IconSearch className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search films"
+                  className="w-full rounded-full border border-white/10 bg-white/5 py-3 pr-3 pl-10 text-sm outline-none focus:border-gold/50"
+                />
+              </label>
+            </form>
+            <nav className="mt-8 grid gap-4 text-lg">{links}</nav>
+            <div className="mt-8 grid gap-3">
+              {user ? (
+                <>
+                  <p className="text-sm text-muted">Signed in as {user.name}</p>
+                  <Button onClick={logout}>Log out</Button>
+                </>
+              ) : (
+                <>
+                  <Button as={Link} to="/login">
+                    Sign in
+                  </Button>
+                  <Button as={Link} to="/signup" variant="ghost">
+                    Create an account
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       ) : null}
-    </header>
+    </>
   )
 }

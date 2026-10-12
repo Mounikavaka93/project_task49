@@ -11,7 +11,7 @@ export default function AuthShell({ title, subtitle, children, footer }) {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/25" />
-        <div className="relative flex h-full flex-col justify-between p-10">
+        <div className="relative flex h-full flex-col justify-between py-10 pr-10 pl-[max(1.5rem,calc((100vw-1120px)/2))]">
           <Link to="/" aria-label="MOVIQ home">
             <Logo />
           </Link>
@@ -25,7 +25,7 @@ export default function AuthShell({ title, subtitle, children, footer }) {
           </div>
         </div>
       </aside>
-      <div className="flex items-center justify-center px-5 py-12">
+      <div className="flex items-center justify-center px-4 py-12 md:px-6">
         <div className="w-full max-w-md">
           <div className="mb-8 lg:hidden">
             <Link to="/" aria-label="MOVIQ home">
