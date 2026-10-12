@@ -1,0 +1,611 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --color-ink: #09090b;
+  --color-cream: #f4efe4;
+  --color-gold: #e2b15c;
+  --color-muted: #a39d92;
+  --color-panel: #141418;
+  --color-ember: #ff6a52;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+    overflow-x: clip;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.shell {
+  width: min(1120px, calc(100% - 2rem));
+  max-width: calc(100% - 2rem);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    width: min(1120px, calc(100% - 3rem));
+  }
+}
+
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  border-radius: 999px;
+  background: var(--color-gold);
+  color: var(--color-ink);
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.rise {
+  animation: rise 0.6s cubic-bezier(0.22, 0.8, 0.3, 1) backwards;
+}
+
+.ken {
+  animation: ken 9s ease-out both;
+}
+
+.loadbar {
+  transform-origin: left;
+  animation: load 7s linear both;
+}
+
+.seat {
+  border-radius: 7px 7px 4px 4px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.28);
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.seat:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.page-in {
+  animation: fade 0.45s ease both;
+}
+
+.menu-in {
+  animation: menu 0.32s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.swap {
+  animation: fade 0.28s ease both;
+}
+
+.step-on {
+  animation: pop 0.28s ease;
+}
+
+.checkout-in {
+  animation: dock 0.35s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.check-glow {
+  animation: halo 1.4s ease-out 0.45s both;
+}
+
+.seat-pop {
+  animation:
+    pop 0.22s ease,
+    glow 1.6s ease-in-out 0.22s infinite;
+}
+
+.screen-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  animation: sweep 3.4s ease-in-out infinite;
+}
+
+.check-circle,
+.check-mark {
+  stroke-dashoffset: 160;
+}
+
+.check-circle {
+  stroke-dasharray: 160;
+  animation: draw 0.7s ease forwards;
+}
+
+.check-mark {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: draw 0.4s 0.5s ease forwards;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes load {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.86);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dock {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(226, 177, 92, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(226, 177, 92, 0.16);
+  }
+}
+
+@keyframes halo {
+  from {
+    box-shadow: 0 0 0 0 rgba(226, 177, 92, 0.45);
+  }
+  to {
+    box-shadow: 0 0 0 16px rgba(226, 177, 92, 0);
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.entrance {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  background: #050506;
+  color: var(--color-cream);
+}
+
+.entrance-out {
+  animation: fade 0.45s ease forwards reverse;
+}
+
+.entrance-grain,
+.entrance-letterbox,
+.entrance-rain,
+.entrance-shake,
+.doors,
+.slash,
+.runner {
+  pointer-events: none;
+}
+
+.entrance-grain {
+  position: absolute;
+  inset: -20%;
+  opacity: 0.18;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.35) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+  animation: grain 0.35s steps(2) infinite;
+}
+
+.entrance-letterbox::before,
+.entrance-letterbox::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  height: 9vh;
+  background: #000;
+}
+
+.entrance-letterbox::before {
+  top: 0;
+  animation: bar-top 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.entrance-letterbox::after {
+  bottom: 0;
+  animation: bar-bottom 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.entrance-rain {
+  position: absolute;
+  inset: -10% 0;
+  background-image: linear-gradient(to bottom, transparent 0 70%, rgba(244, 239, 228, 0.45) 70% 100%);
+  background-size: 2px 22px;
+  opacity: 0.28;
+  animation: rain 0.45s linear infinite;
+}
+
+.entrance-shake {
+  position: absolute;
+  inset: 0;
+  animation: hit 0.42s linear 2;
+  box-shadow: inset 0 0 80px rgba(255, 106, 82, 0.25);
+}
+
+.runner {
+  position: absolute;
+  top: 46%;
+  left: 0;
+  width: 18px;
+  height: 46px;
+  border-radius: 10px 10px 4px 4px;
+  background: linear-gradient(#f4efe4, #e2b15c);
+  animation: sprint 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  filter: blur(0.2px);
+}
+
+.runner::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 1px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-cream);
+}
+
+.slash {
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  left: -20%;
+  width: 18%;
+  background: linear-gradient(90deg, transparent, rgba(226, 177, 92, 0.85), transparent);
+  transform: skewX(-18deg);
+  animation: slash 0.7s ease-out both;
+}
+
+.doors {
+  position: absolute;
+  inset: 9vh 0;
+  perspective: 900px;
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background:
+    linear-gradient(90deg, rgba(226, 177, 92, 0.18), transparent 18%),
+    #121216;
+  box-shadow: inset 0 0 0 1px rgba(226, 177, 92, 0.25);
+}
+
+.door-left {
+  left: 0;
+  transform-origin: left center;
+  animation: door-left 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+}
+
+.door-right {
+  right: 0;
+  transform-origin: right center;
+  animation: door-right 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+}
+
+.door-glow {
+  position: absolute;
+  inset: 20% 30%;
+  background: radial-gradient(circle, rgba(226, 177, 92, 0.55), transparent 68%);
+  animation: fade 0.8s ease 0.4s both;
+}
+
+.entrance-stage {
+  position: relative;
+  z-index: 7;
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  padding: 18vh 1.5rem;
+  text-align: center;
+}
+
+.entrance-card {
+  max-width: 40rem;
+  animation: rise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.entrance-kicker {
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.entrance-line {
+  margin-top: 0.8rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  line-height: 1.15;
+}
+
+.entrance-title h1 {
+  animation: title-hit 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.entrance-skip {
+  position: absolute;
+  top: calc(9vh + 0.8rem);
+  right: 1rem;
+  z-index: 8;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.entrance-skip:hover {
+  color: var(--color-cream);
+}
+
+.entrance-ticks {
+  position: absolute;
+  bottom: calc(9vh + 1rem);
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.entrance-ticks li {
+  width: 1.4rem;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.entrance-ticks li.is-on {
+  background: var(--color-gold);
+  animation: load 0.35s ease both;
+}
+
+@keyframes grain {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-2%, 1%);
+  }
+}
+
+@keyframes bar-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes bar-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes rain {
+  from {
+    transform: translateY(-22px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hit {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes sprint {
+  from {
+    transform: translateX(-20vw) skewX(-14deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(110vw) skewX(-8deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slash {
+  from {
+    transform: translateX(0) skewX(-18deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(140vw) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes door-left {
+  to {
+    transform: perspective(900px) rotateY(-75deg);
+  }
+}
+
+@keyframes door-right {
+  to {
+    transform: perspective(900px) rotateY(75deg);
+  }
+}
+
+@keyframes title-hit {
+  from {
+    letter-spacing: 0.4em;
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    letter-spacing: 0;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
